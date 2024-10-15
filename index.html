@@ -10,11 +10,11 @@
             width: 100%;
             margin: 0;
             padding: 0;
-            overflow: hidden    ;
+            overflow: hidden;
         }
         #container {
-            height: 100%;
-            width: 100%;
+            height: 100vh; /* Use viewport height */
+            width: 100vw;  /* Use viewport width */
         }
     </style>
 </head>
@@ -27,16 +27,16 @@
 
         require(["./vs/editor/editor.main"], function () {
             editor = monaco.editor.create(document.getElementById("container"), {
-                value: '-- Created by @94to on Discord',
+                value: '-- Created by @94to on Discord\n-- Dont forget to join https://discord.gg/YqhJegxgK6',
                 language: "lua",
-				theme: "vs-dark",
-				dragAndDrop: true,
-				links: false,
-				minimap: {
-					enabled: false,
-				},
-				showFoldingControls: "always",
-				smoothScrolling: true,
+                theme: "vs-dark",
+                dragAndDrop: true,
+                links: false,
+                minimap: {
+                    enabled: false,
+                },
+                showFoldingControls: "always",
+                smoothScrolling: true,
             });
         });
 
@@ -47,6 +47,11 @@
         function setValue(value) {
             editor.setValue(value);
         }
+
+        // Resize editor on window resize
+        window.addEventListener('resize', function() {
+            editor.layout(); // Adjust the editor layout
+        });
     </script>
 </body>
 </html>
