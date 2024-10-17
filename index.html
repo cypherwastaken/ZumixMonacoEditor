@@ -1,69 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zumix Editor</title>
     <style>
         html, body {
             height: 100%;
-            width: 100%;
             margin: 0;
-            padding: 0;
             overflow: hidden;
         }
-        #container {
-            height: 100vh;
-            width: 100vw;
+        #editor {
+            height: 100%;
+            width: 100%;
         }
     </style>
 </head>
 <body>
-    <div id="container"></div>
-
-    <script src="./vs/loader.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        
-        
-        var editor;
-
-        require(["./vs/editor/editor.main"], function () {
-            monaco.editor.defineTheme('cobalt', {
-                "base": "vs-dark",
-                "inherit": true,
-                "rules": [],
-                "colors": {
-                    "editor.background": "#2c4d5d",
-                    "editor.lineHighlightBackground": "#2c4d5d"
-                }
-            });
-            
-            editor = monaco.editor.create(document.getElementById("container"), {
-                value: '-- Created by @94to on Discord\n-- Dont forget to join https://discord.gg/YqhJegxgK6',
-                language: "lua",
-                theme: "cobalt",
-                dragAndDrop: true,
-                links: true,
-                minimap: {
-                    enabled: false,
-                },
-                showFoldingControls: "always",
-                smoothScrolling: true,
-            });
-        });
-
-        function getValue() {
-            return editor.getValue();
-        }
-
-        function setValue(value) {
-            editor.setValue(value);
-        }
-
-        // Resize editor on window resize
-        window.addEventListener('resize', function() {
-            editor.layout(); // Adjust the editor layout
-        });
+    <div id="editor"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+    <script>
+        const editor = ace.edit("editor");
+        editor.setTheme("ace/theme/cobalt");
+        editor.session.setMode("ace/mode/lua");
+        editor.setValue("-- Created by @94to\n-- Make sure to join https://discord.gg/YqhJegxgK6");
     </script>
 </body>
 </html>
