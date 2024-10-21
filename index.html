@@ -16,54 +16,66 @@
             height: 100vh;
             width: 100vw;
         }
+        #message {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-size: 24px;
+            color: #fff;
+            background-color: #2c4d5d;
+        }
     </style>
+    <title>imagine larping</title>
 </head>
 <body>
-    <div id="container"></div>
+    <div id="container" style="display: none;"></div>
+    <div id="message" style="display: none;">stop being a skid and get good lmao</div>
 
     <script src="./vs/loader.js" type="text/javascript"></script>
     <script type="text/javascript">
-        
-        
         var editor;
 
-        require(["./vs/editor/editor.main"], function () {
-            monaco.editor.defineTheme('cobalt', {
-                "base": "vs-dark",
-                "inherit": true,
-                "rules": [],
-                "colors": {
-                    "editor.background": "#2c4d5d",
-                    "editor.lineHighlightBackground": "#2c4d5d"
-                }
+        if (localStorage.getItem("ExecId") === "Zumix") {
+            document.getElementById("container").style.display = "block";
+            require(["./vs/editor/editor.main"], function () {
+                monaco.editor.defineTheme('cobalt', {
+                    "base": "vs-dark",
+                    "inherit": true,
+                    "rules": [],
+                    "colors": {
+                        "editor.background": "#2c4d5d",
+                        "editor.lineHighlightBackground": "#2c4d5d"
+                    }
+                });
+                editor = monaco.editor.create(document.getElementById("container"), {
+                    value: '-- Created by @94to on Discord\n-- Dont forget to join https://discord.gg/YqhJegxgK6',
+                    language: "lua",
+                    theme: "vs-dark",
+                    dragAndDrop: true,
+                    links: true,
+                    minimap: {
+                        enabled: false,
+                    },
+                    showFoldingControls: "always",
+                    smoothScrolling: true,
+                });
             });
-            
-            editor = monaco.editor.create(document.getElementById("container"), {
-                value: '-- Created by @94to on Discord\n-- Dont forget to join https://discord.gg/YqhJegxgK6',
-                language: "lua",
-                theme: "vs-dark",
-                dragAndDrop: true,
-                links: true,
-                minimap: {
-                    enabled: false,
-                },
-                showFoldingControls: "always",
-                smoothScrolling: true,
+
+            function getValue() {
+                return editor.getValue();
+            }
+
+            function setValue(value) {
+                editor.setValue(value);
+            }
+
+            window.addEventListener('resize', function() {
+                editor.layout();
             });
-        });
-
-        function getValue() {
-            return editor.getValue();
+        } else {
+            document.getElementById("message").style.display = "flex";
         }
-
-        function setValue(value) {
-            editor.setValue(value);
-        }
-
-        // Resize editor on window resize
-        window.addEventListener('resize', function() {
-            editor.layout(); // Adjust the editor layout
-        });
     </script>
 </body>
 </html>
